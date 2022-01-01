@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  WarrantyApp
+
+  Created by Pedro Henrique on 25/12/21.
+  
+*/
+
+"StuffListTitle" = "Minhas Coisas";
+"EmptyStuffList" = "Cadastre um produto";
+
+"ProductData" = "Dados do produto";
+"ProductName" = "Nome";
+"ProductManufacturer" = "Fabricante";
+"WarrantyData" = "Dados da garantia";
+"PurchaseDate" = "Data de compra";
+"WarrantyStartDate" = "Começo da garantia";
+"WarrantyLengthInMonths" = "Meses de garantia";
+"LifetimeWarranty" = "Garantia Eterna";
+"ShouldNotify" = "Notificar?";

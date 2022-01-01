@@ -10,11 +10,19 @@ import SwiftUI
 @main
 struct WarrantyAppApp: App {
     let persistenceController = PersistenceController.shared
-
+    
+    @AppStorage("didShowOnboarding", store: UserDefaults.standard)
+    private var didShowOnboarding: Bool?
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            if didShowOnboarding ?? false {
+                NavigationView {
+                    StuffListView(viewModel: StuffViewModel(persistenceController: persistenceController))
+                }
+            }else {
+                OnboardingView()
+            }
         }
     }
 }

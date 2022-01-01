@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  WarrantyApp
+
+  Created by Pedro Henrique on 25/12/21.
+  
+*/
+
+"StuffListTitle" = "My Stuff";
+"EmptyStuffList" = "Add some stuff!";
