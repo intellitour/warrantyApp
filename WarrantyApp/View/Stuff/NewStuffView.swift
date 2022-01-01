@@ -18,10 +18,6 @@ struct NewStuffView: View {
     @EnvironmentObject
     var viewModel: StuffViewModel
     
-    
-    @State
-    private var product = Product.StateObject()
-    
     @FocusState
     private var focus: Focus?
     
@@ -39,7 +35,31 @@ struct NewStuffView: View {
     @State
     private var imagePickerSourceType: UIImagePickerController.SourceType = .photoLibrary
     
+    @Environment(\.dismiss)
+    private var dismiss
+    
+    @ViewBuilder
     var body: some View {
+        
+        if viewModel.loading {
+            ProgressView()
+        }else {
+            if let _ = viewModel.productState.id {
+                Group {
+                    ProgressView()
+                }.onAppear {
+                    viewModel.productState = Product.StateObject()
+                    dismiss()
+                }
+            }else {
+                renderForm()
+            }
+        }
+        
+    }
+     
+    
+    private func renderForm() -> some View {
         Form {
             ZStack(alignment: selectedImage != nil ? .bottomTrailing : .center) {
                 
@@ -91,15 +111,15 @@ struct NewStuffView: View {
             }
             
             Section(LocalizedStringKey("ProductData")) {
-                TextField(LocalizedStringKey("ProductName"), text: $product.name)
+                TextField(LocalizedStringKey("ProductName"), text: $viewModel.productState.name)
                     .focused($focus, equals: .name)
-                TextField("Fabricante", text: $product.manufacturer)
+                TextField("Fabricante", text: $viewModel.productState.manufacturer)
                     .focused($focus, equals: .manufacturer)
             }
             
             Section(LocalizedStringKey("WarrantyData")) {
-                DatePicker(LocalizedStringKey("ProductManufacturer"),
-                           selection: $product.purchaseDate,
+                DatePicker(LocalizedStringKey("PurchaseDate"),
+                           selection: $viewModel.productState.purchaseDate,
                            in: PartialRangeThrough(.now),
                            displayedComponents: .date
                 )
@@ -107,7 +127,7 @@ struct NewStuffView: View {
                 .focused($focus, equals: .purchaseDate)
                 
                 DatePicker(LocalizedStringKey("WarrantyStartDate"),
-                           selection: $product.warrantyStartDate,
+                           selection: $viewModel.productState.warrantyStartDate,
                            in: PartialRangeThrough(.now),
                            displayedComponents: .date
                 )
@@ -120,7 +140,7 @@ struct NewStuffView: View {
                     Spacer()
                     
                     TextField(LocalizedStringKey("WarrantyLengthInMonths"),
-                              value: $product.warrantyMonths,
+                              value: $viewModel.productState.warrantyMonths,
                               formatter: NumberFormatter()
                     )
                     .focused($focus, equals: .warrantyMonths)
@@ -128,20 +148,20 @@ struct NewStuffView: View {
                     .multilineTextAlignment(.trailing)
                 }
                 
-                Toggle(LocalizedStringKey("ShouldNotify"), isOn: $product.shouldNotify)
+                Toggle(LocalizedStringKey("ShouldNotify"), isOn: $viewModel.productState.shouldNotify)
             }
             
             Section {
                 VStack(alignment: .center) {
-                    Button("Salvar") {
-                        viewModel.save(product)
+                    Button(LocalizedStringKey("Save")) {
+                        viewModel.save()
                     }
                 }
             }
         }
-        .navigationTitle(product.name)
+        .navigationTitle(viewModel.productState.name)
         .navigationBarItems(trailing: Button("\(Image(systemName: "checkmark"))") {
-            print(product.purchaseDate)
+            viewModel.save()
         })
         .onAppear {
             formatter.numberStyle = .ordinal
@@ -150,16 +170,16 @@ struct NewStuffView: View {
             formatter.minimum = 0
             formatter.maximum = NSNumber(value: Int16.max)
         }
-        .confirmationDialog("Origem da imagem",
+        .confirmationDialog(LocalizedStringKey("ImageSourceConfirmTitle"),
                             isPresented: $showImagePickerActionSheet,
                             titleVisibility: .visible
         ) {
-            Button("Câmera") {
+            Button(LocalizedStringKey("CameraImageSource")) {
                 imagePickerSourceType = .camera
                 showImagePicker = true
             }
             
-            Button("Biblioteca de Fotos") {
+            Button(LocalizedStringKey("LibraryImageSource")) {
                 imagePickerSourceType = .photoLibrary
                 showImagePicker = true
             }
@@ -175,10 +195,11 @@ struct NewStuffView: View {
             if let image = newValue?.uiImage,
                let url = viewModel.storePhoto(image)
             {
-                product.photo = url
+                viewModel.productState.photo = url
             }
         })
     }
+        
 }
 
 

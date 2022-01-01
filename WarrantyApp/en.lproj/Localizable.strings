@@ -8,3 +8,21 @@
 
 "StuffListTitle" = "My Stuff";
 "EmptyStuffList" = "Add some stuff!";
+
+"Save" = "Save";
+
+"ProductData" = "Product Data";
+"ProductName" = "Name";
+"ProductManufacturer" = "Manufacturer";
+"WarrantyData" = "Warranty Data";
+"PurchaseDate" = "Purchase Date";
+"WarrantyStartDate" = "Warranty Start Date";
+"WarrantyLengthInMonths" = "Warranty Length (Months)";
+"LifetimeWarranty" = "Lifetime Warranty";
+"ShouldNotify" = "Should Notify?";
+
+"ImageSourceConfirmTitle" = "Add a picture";
+"CameraImageSource" = "Using camera";
+"LibraryImageSource" = "Picking from Library";
+
+"WarrantyDaysRemaining" = "Warranty days remaining:";

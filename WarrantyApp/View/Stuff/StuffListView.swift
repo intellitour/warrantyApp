@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PureSwiftUI
 
 struct StuffListView: View {
     
@@ -14,13 +15,45 @@ struct StuffListView: View {
 
     @State
     private var selection: String? = nil
+    
+    @FetchRequest(
+        entity: Product.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Product.purchaseDate, ascending: false),
+            NSSortDescriptor(keyPath: \Product.warrantyStartDate, ascending: false),
+            NSSortDescriptor(keyPath: \Product.name, ascending: true),
+            NSSortDescriptor(keyPath: \Product.manufacturer, ascending: true)
+        ],
+        predicate: nil,
+        animation: Animation.interactiveSpring()
+    )
+    private var products: FetchedResults<Product>
 
     var body: some View {
         VStack {
-            if viewModel.stuff.count == 0 {
+            if products.count == 0 {
                 EmptyList(onAdd: onAddStuff)
             }else {
-                List(viewModel.stuff) { product in
+                List(products) { product in
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Image(uiImage: product.uiImage)
+                                .antialiased(true)
+                                .resizedToFill(CGSize(width: 70, height: 70))
+                                .clipCircle()
+                                .strokeCircle(.accentColor, lineWidth: 4)
+                            
+                            VStack(alignment: .leading) {
+                                
+                                HeadlineText(product.name ?? "")
+                                SubheadlineText(product.manufacturer ?? "")
+                            }
+                            .padding()
+                        }
+                        BodyText("\(String(localized: "WarrantyDaysRemaining")) \(product.remainingWarrantyDays)")
+                    }
+                    
+                    
                     
                 }
             }

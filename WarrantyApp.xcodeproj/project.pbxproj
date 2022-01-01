@@ -22,6 +22,7 @@
 		EBE4BC3F277D41CB0073F8F5 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE4BC3E277D41CB0073F8F5 /* Product.swift */; };
 		EBEDBD45277F676000947C55 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEDBD44277F676000947C55 /* ImagePicker.swift */; };
 		EBEDBD4827809E4300947C55 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EBEDBD4727809E4300947C55 /* SwifterSwift */; };
+		EBEDBD4B2780F06C00947C55 /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = EBEDBD4A2780F06C00947C55 /* PureSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBEDBD4B2780F06C00947C55 /* PureSwiftUI in Frameworks */,
 				EBEDBD4827809E4300947C55 /* SwifterSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,6 +177,7 @@
 			name = WarrantyApp;
 			packageProductDependencies = (
 				EBEDBD4727809E4300947C55 /* SwifterSwift */,
+				EBEDBD4A2780F06C00947C55 /* PureSwiftUI */,
 			);
 			productName = WarrantyApp;
 			productReference = EB87371D2777BC040022B442 /* WarrantyApp.app */;
@@ -207,6 +210,7 @@
 			mainGroup = EB8737142777BC040022B442;
 			packageReferences = (
 				EBEDBD4627809E4300947C55 /* XCRemoteSwiftPackageReference "SwifterSwift" */,
+				EBEDBD492780F06C00947C55 /* XCRemoteSwiftPackageReference "pure-swift-ui" */,
 			);
 			productRefGroup = EB87371E2777BC040022B442 /* Products */;
 			projectDirPath = "";
@@ -408,7 +412,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Get photo of your warranted stuff";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -441,7 +445,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Get photo of your warranted stuff";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -489,6 +493,14 @@
 				minimumVersion = 5.2.0;
 			};
 		};
+		EBEDBD492780F06C00947C55 /* XCRemoteSwiftPackageReference "pure-swift-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CodeSlicing/pure-swift-ui.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -496,6 +508,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EBEDBD4627809E4300947C55 /* XCRemoteSwiftPackageReference "SwifterSwift" */;
 			productName = SwifterSwift;
+		};
+		EBEDBD4A2780F06C00947C55 /* PureSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EBEDBD492780F06C00947C55 /* XCRemoteSwiftPackageReference "pure-swift-ui" */;
+			productName = PureSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 

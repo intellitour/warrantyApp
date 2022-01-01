@@ -23,18 +23,22 @@ class StuffViewModel: ObservableObject {
     var stuff = [Product]()
     
     @Published
+    var productState = Product.StateObject()
+    
+    @Published
     var loading = false
     
     @Published
     var error: Error?
     
     
-    func save(_ product: Product.StateObject) {
+    func save() {
         do {
             loading = true
             let context = persistenceController.container.viewContext
-            product.createProduct(in: context)
+            let persistent = productState.createProduct(in: context)
             try context.save()
+            productState.id = persistent.objectID
             loading = false
         }catch (let error) {
             self.error = error

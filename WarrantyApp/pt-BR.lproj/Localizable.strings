@@ -9,6 +9,8 @@
 "StuffListTitle" = "Minhas Coisas";
 "EmptyStuffList" = "Cadastre um produto";
 
+"Save" = "Salvar";
+
 "ProductData" = "Dados do produto";
 "ProductName" = "Nome";
 "ProductManufacturer" = "Fabricante";
@@ -18,3 +20,9 @@
 "WarrantyLengthInMonths" = "Meses de garantia";
 "LifetimeWarranty" = "Garantia Eterna";
 "ShouldNotify" = "Notificar?";
+
+"ImageSourceConfirmTitle" = "Adicionar Foto do Produto";
+"CameraImageSource" = "Usar a Câmera";
+"LibraryImageSource" = "Escolher da Fototeca";
+
+"WarrantyDaysRemaining" = "Dias restantes de garantia:";

@@ -22,11 +22,16 @@ extension SelectedImage : Equatable {
 }
 
 struct PHImagePicker: UIViewControllerRepresentable {
-    @Binding var selectedImage: SelectedImage?
+    typealias UIViewControllerType = PHPickerViewController
+    
+    @Binding
+    var selectedImage: SelectedImage?
 
     func makeUIViewController(context: Context) -> PHPickerViewController {
         var config = PHPickerConfiguration()
         config.filter = .images
+        config.selectionLimit = 1
+        
         let picker = PHPickerViewController(configuration: config)
         picker.delegate = context.coordinator
         return picker
@@ -78,9 +83,14 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()
-        imagePicker.navigationBar.tintColor = .clear
-        imagePicker.allowsEditing = false
+        imagePicker.allowsEditing = true
         imagePicker.sourceType = sourceType
+        imagePicker.cameraCaptureMode = .photo
+        imagePicker.cameraFlashMode = .auto
+        imagePicker.cameraDevice = .rear
+        imagePicker.showsCameraControls = true
+        imagePicker.modalPresentationStyle = .fullScreen
+        
         imagePicker.delegate = context.coordinator
         return imagePicker
       }
@@ -101,10 +111,20 @@ struct ImagePicker: UIViewControllerRepresentable {
 
         func imagePickerController(_ picker: UIImagePickerController,
                                    didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-          if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            if let image = (info[.editedImage] ?? info[.originalImage]) as? UIImage {
               self.control.selectedImage = SelectedImage(uiImage: image, image: Image(uiImage: image))
           }
           control.presentationMode.wrappedValue.dismiss()
         }
       }
+}
+
+extension UIImagePickerController {
+    
+    override open var shouldAutorotate: Bool {
+        return true
+    }
+    override open var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .portrait
+    }
 }

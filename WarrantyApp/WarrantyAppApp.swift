@@ -20,6 +20,7 @@ struct WarrantyAppApp: App {
                 NavigationView {
                     StuffListView(viewModel: StuffViewModel(persistenceController: persistenceController))
                 }
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }else {
                 OnboardingView()
             }

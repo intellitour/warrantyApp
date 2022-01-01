@@ -3,7 +3,7 @@
     <entity name="Product" representedClassName=".Product" syncable="YES" codeGenerationType="category">
         <attribute name="manufacturer" attributeType="String" defaultValueString="No manufacturer" spotlightIndexingEnabled="YES"/>
         <attribute name="name" attributeType="String" defaultValueString="No name" spotlightIndexingEnabled="YES"/>
-        <attribute name="photo" optional="YES" attributeType="URI"/>
+        <attribute name="photo" optional="YES" attributeType="String"/>
         <attribute name="purchaseDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="shouldNotify" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="warrantyMonths" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
