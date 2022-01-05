@@ -30,6 +30,26 @@ class Product: NSManagedObject {
         return Int.min
     }
     
+    enum NotificationScheme: Int16, CustomStringConvertible, CaseIterable, Identifiable {
+        var id: String {
+            return description
+        }
+        
+        case month
+        case threeDays
+        case oneDay
+        case other
+        
+        var description: String {
+            switch self {
+                case .month: return String(localized: "NotificationSchemeMonth")
+                case .threeDays: return String(localized: "NotificationSchemeThreeDays")
+                case .oneDay: return String(localized: "NotificationSchemeOneDay")
+                case .other: return String(localized: "NotificationSchemeOther")
+            }
+        }
+    }
+    
     
     struct StateObject {
         var id: NSManagedObjectID? = nil
@@ -39,7 +59,9 @@ class Product: NSManagedObject {
         var purchaseDate: Date = .now
         var warrantyMonths: NSNumber = 12
         var warrantyStartDate: Date = .now
-        var shouldNotify: Bool = true
+        var shouldNotify: Bool = false
+        var notificationScheme: NotificationScheme = .month
+        
         
         func createProduct(in context: NSManagedObjectContext) -> Product {
             let product = Product(context: context)
@@ -51,6 +73,7 @@ class Product: NSManagedObject {
             product.warrantyStartDate = warrantyStartDate
             product.warrantyMonths = warrantyMonths.int16Value
             product.shouldNotify = shouldNotify
+            product.notificationScheme = notificationScheme.rawValue
             
             return product
         }

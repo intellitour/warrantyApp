@@ -10,11 +10,12 @@
 "EmptyStuffList" = "Cadastre um produto";
 
 "Save" = "Salvar";
+"Cancel" = "Cancelar";
 
 "ProductData" = "Dados do produto";
 "ProductName" = "Nome";
 "ProductManufacturer" = "Fabricante";
-"WarrantyData" = "Dados da garantia";
+"WarrantyData" = "Dados da cobertura de garantia";
 "PurchaseDate" = "Data de compra";
 "WarrantyStartDate" = "Começo da garantia";
 "WarrantyLengthInMonths" = "Meses de garantia";
@@ -26,3 +27,16 @@
 "LibraryImageSource" = "Escolher da Fototeca";
 
 "WarrantyDaysRemaining" = "Dias restantes de garantia:";
+
+"NotificationScheme" = "Antecedência de Notificação";
+
+"NotificationSchemeMonth" = "Uma mês";
+"NotificationSchemeThreeDays" = "Três dias";
+"NotificationSchemeOneDay" = "Um dia";
+"NotificationSchemeOther" = "Outro";
+
+"NotificationsDisabledAlertTitle" = "Notificações Desabilitadas!";
+"NotificationsDisabledAlertMessage" = "As notificações estão desabilitadas. Por favor, habilite-as nas configurações e depois tente novamente.";
+"NotificationsDisabledAlertGoToSettingsButton" = "Ir para as Configurações";
+
+

@@ -42,6 +42,7 @@ struct StuffListView: View {
                                 .resizedToFill(CGSize(width: 70, height: 70))
                                 .clipCircle()
                                 .strokeCircle(.accentColor, lineWidth: 4)
+                                .padding([.top, .bottom], 8)
                             
                             VStack(alignment: .leading) {
                                 

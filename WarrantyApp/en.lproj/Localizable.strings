@@ -10,11 +10,12 @@
 "EmptyStuffList" = "Add some stuff!";
 
 "Save" = "Save";
+"Cancel" = "Cancel";
 
 "ProductData" = "Product Data";
 "ProductName" = "Name";
 "ProductManufacturer" = "Manufacturer";
-"WarrantyData" = "Warranty Data";
+"WarrantyData" = "Warranty Coverage Data";
 "PurchaseDate" = "Purchase Date";
 "WarrantyStartDate" = "Warranty Start Date";
 "WarrantyLengthInMonths" = "Warranty Length (Months)";
@@ -26,3 +27,14 @@
 "LibraryImageSource" = "Picking from Library";
 
 "WarrantyDaysRemaining" = "Warranty days remaining:";
+
+"NotificationScheme" = "Notify me before";
+
+"NotificationSchemeMonth" = "A month";
+"NotificationSchemeThreeDays" = "Three days";
+"NotificationSchemeOneDay" = "One day";
+"NotificationSchemeOther" = "Other";
+
+"NotificationsDisabledAlertTitle" = "Notifications are Disabled!";
+"NotificationsDisabledAlertMessage" = "Notifications are disabled. Please, turn them on in Settings then try again.";
+"NotificationsDisabledAlertGoToSettingsButton" = "Go to Settings";

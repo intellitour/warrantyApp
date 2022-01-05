@@ -3,6 +3,7 @@
     <entity name="Product" representedClassName=".Product" syncable="YES" codeGenerationType="category">
         <attribute name="manufacturer" attributeType="String" defaultValueString="No manufacturer" spotlightIndexingEnabled="YES"/>
         <attribute name="name" attributeType="String" defaultValueString="No name" spotlightIndexingEnabled="YES"/>
+        <attribute name="notificationScheme" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="photo" optional="YES" attributeType="String"/>
         <attribute name="purchaseDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="shouldNotify" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
@@ -10,6 +11,6 @@
         <attribute name="warrantyStartDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <elements>
-        <element name="Product" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="Product" positionX="-63" positionY="-18" width="128" height="149"/>
     </elements>
 </model>

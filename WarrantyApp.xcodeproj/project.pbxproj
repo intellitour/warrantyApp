@@ -23,6 +23,7 @@
 		EBEDBD45277F676000947C55 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEDBD44277F676000947C55 /* ImagePicker.swift */; };
 		EBEDBD4827809E4300947C55 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EBEDBD4727809E4300947C55 /* SwifterSwift */; };
 		EBEDBD4B2780F06C00947C55 /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = EBEDBD4A2780F06C00947C55 /* PureSwiftUI */; };
+		EBEDBD4E27831FA300947C55 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBEDBD4D27831FA300947C55 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		EBE4BC3A277A22660073F8F5 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		EBE4BC3E277D41CB0073F8F5 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		EBEDBD44277F676000947C55 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		EBEDBD4D27831FA300947C55 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBEDBD4E27831FA300947C55 /* StoreKit.framework in Frameworks */,
 				EBEDBD4B2780F06C00947C55 /* PureSwiftUI in Frameworks */,
 				EBEDBD4827809E4300947C55 /* SwifterSwift in Frameworks */,
 			);
@@ -63,6 +66,7 @@
 			children = (
 				EB87371F2777BC040022B442 /* WarrantyApp */,
 				EB87371E2777BC040022B442 /* Products */,
+				EBEDBD4C27831FA300947C55 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -157,6 +161,14 @@
 			children = (
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		EBEDBD4C27831FA300947C55 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EBEDBD4D27831FA300947C55 /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -28,6 +28,9 @@ struct NewStuffView: View {
     
     @State
     private var showImagePickerActionSheet = false
+
+    @State
+    private var showUnauthorizedNotificationAlert = false
     
     @State
     private var selectedImage: SelectedImage? = nil
@@ -149,6 +152,53 @@ struct NewStuffView: View {
                 }
                 
                 Toggle(LocalizedStringKey("ShouldNotify"), isOn: $viewModel.productState.shouldNotify)
+                    .onChange(of: viewModel.productState.shouldNotify) { newValue in
+                        if newValue {
+                            viewModel.requestNotificationAuthorization()
+                        }
+                    }
+                    .onChange(of: viewModel.notificationAuthorized, perform: { newValue in
+                        if !newValue && viewModel.hasRequestNotificationAuthorization {
+                            viewModel.productState.shouldNotify = false
+                            showUnauthorizedNotificationAlert = true
+                        }
+                    })
+                    .alert(LocalizedStringKey("NotificationsDisabledAlertTitle"), isPresented: $showUnauthorizedNotificationAlert) {
+                        HStack {
+                            Button(LocalizedStringKey("Cancel"), role: .cancel) {
+
+                            }
+                            Button(LocalizedStringKey("NotificationsDisabledAlertGoToSettingsButton")) {
+                                if let url = URL(string: UIApplication.openSettingsURLString) {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                }
+                            }
+                        }
+                    } message: {
+                        Text(String(localized: "NotificationsDisabledAlertMessage"))
+                    }
+
+                
+                if viewModel.productState.shouldNotify {
+                    VStack(alignment: .leading) {
+                        Text(LocalizedStringKey("NotificationScheme"))
+                        
+                        Picker(LocalizedStringKey("NotificationScheme"), selection: $viewModel.productState.notificationScheme) {
+                            ForEach(Product.NotificationScheme.allCases) { scheme in
+                                Button(scheme.description) {
+                                    
+                                }
+                                .tag(scheme)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                    }
+                    
+                    if viewModel.productState.notificationScheme == .other {
+                        
+                    }
+                    
+                }
             }
             
             Section {

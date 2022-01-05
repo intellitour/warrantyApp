@@ -30,8 +30,25 @@ class StuffViewModel: ObservableObject {
     
     @Published
     var error: Error?
-    
-    
+
+    @Published
+    var notificationAuthorized = true
+
+    @Published
+    var hasRequestNotificationAuthorization = false
+
+    func requestNotificationAuthorization() {
+        hasRequestNotificationAuthorization = true
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { [weak self] authorized, error in
+            DispatchQueue.main.async { [weak self] in
+                self?.notificationAuthorized = authorized
+                if !authorized {
+                    self?.productState.shouldNotify = false
+                }
+            }
+        }
+    }
+
     func save() {
         do {
             loading = true
@@ -40,11 +57,33 @@ class StuffViewModel: ObservableObject {
             try context.save()
             productState.id = persistent.objectID
             loading = false
+            Task {
+                await scheduleNotifications(for: persistent)
+            }
         }catch (let error) {
             self.error = error
             debugPrint(error)
         }
     }
+    
+    private func scheduleNotifications(for product: Product) async {
+        //TODO: calcular notificações corretamente
+        let content = UNMutableNotificationContent()
+        content.title = product.name!
+        content.subtitle = "Warranty Status"
+        content.body = "Warranty for \(product.name!) has 10 days remaining"
+        content.sound = .defaultCritical
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: product.objectID.description,
+                                            content: content,
+                                            trigger: trigger)
+        
+        try? await UNUserNotificationCenter.current().add(request)
+        
+    }
+    
     
     func storePhoto(_ photo: UIImage) -> URL? {
         let isHorizontal = photo.size.width > photo.size.height
