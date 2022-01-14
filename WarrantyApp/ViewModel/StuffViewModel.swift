@@ -10,13 +10,18 @@ import Combine
 import SwiftUI
 import SwifterSwift
 import UniformTypeIdentifiers.UTType
+import StoreKit
 
 class StuffViewModel: ObservableObject {
+
+    @ObservedObject
+    private var iapManager = IAPManager.shared
     
     let persistenceController: PersistenceController
     
     init(persistenceController: PersistenceController) {
         self.persistenceController = persistenceController
+        iapManager.getProducts(withHandler: iapProductsHandler(result:))
     }
     
     @Published
@@ -36,6 +41,11 @@ class StuffViewModel: ObservableObject {
 
     @Published
     var hasRequestNotificationAuthorization = false
+
+    private func iapProductsHandler(result: Result<[SKProduct], IAPManager.IAPManagerError>) {
+        print(result);
+    }
+
 
     func requestNotificationAuthorization() {
         hasRequestNotificationAuthorization = true
@@ -67,21 +77,37 @@ class StuffViewModel: ObservableObject {
     }
     
     private func scheduleNotifications(for product: Product) async {
-        //TODO: calcular notificações corretamente
-        let content = UNMutableNotificationContent()
-        content.title = product.name!
-        content.subtitle = "Warranty Status"
-        content.body = "Warranty for \(product.name!) has 10 days remaining"
-        content.sound = .defaultCritical
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: product.objectID.description,
-                                            content: content,
-                                            trigger: trigger)
-        
-        try? await UNUserNotificationCenter.current().add(request)
-        
+        var timeInterval: TimeInterval? = nil
+        var daysRemaining: Int? = nil
+        switch Product.NotificationScheme(rawValue: product.notificationScheme) {
+            case .month:
+                timeInterval = product.warrantyStartDate?.adding(.month, value: Int(product.warrantyMonths - 1)).timeIntervalSinceNow
+                daysRemaining = 30
+            case .threeDays:
+                timeInterval = product.warrantyStartDate?.adding(.month, value: Int(product.warrantyMonths)).adding(.day, value: -3).timeIntervalSinceNow
+                daysRemaining = 3
+            case .oneDay:
+                timeInterval = product.warrantyStartDate?.adding(.month, value: Int(product.warrantyMonths)).adding(.day, value: -1).timeIntervalSinceNow
+                daysRemaining = 1
+            case .none: break
+        }
+
+        if let timeInterval = timeInterval, let daysRemaining = daysRemaining {
+            let content = UNMutableNotificationContent()
+            content.title = product.name!
+            content.subtitle = "Warranty Status"
+            content.body = "Warranty for \(product.name!) has \(daysRemaining) days remaining"
+            content.sound = .defaultCritical
+
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+
+            let request = UNNotificationRequest(identifier: product.objectID.description,
+                                                content: content,
+                                                trigger: trigger)
+
+            try? await UNUserNotificationCenter.current().add(request)
+        }
+
     }
     
     

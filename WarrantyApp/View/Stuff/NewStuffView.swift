@@ -194,9 +194,9 @@ struct NewStuffView: View {
                         .pickerStyle(.segmented)
                     }
                     
-                    if viewModel.productState.notificationScheme == .other {
-                        
-                    }
+//                    if viewModel.productState.notificationScheme == .other {
+//
+//                    }
                     
                 }
             }

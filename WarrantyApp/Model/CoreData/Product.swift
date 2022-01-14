@@ -38,14 +38,14 @@ class Product: NSManagedObject {
         case month
         case threeDays
         case oneDay
-        case other
+//        case other
         
         var description: String {
             switch self {
                 case .month: return String(localized: "NotificationSchemeMonth")
                 case .threeDays: return String(localized: "NotificationSchemeThreeDays")
                 case .oneDay: return String(localized: "NotificationSchemeOneDay")
-                case .other: return String(localized: "NotificationSchemeOther")
+//                case .other: return String(localized: "NotificationSchemeOther")
             }
         }
     }
